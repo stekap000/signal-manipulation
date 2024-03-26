@@ -1,5 +1,7 @@
 *main_test*
 build/
 code/build*
+code/run*
+code/make*
 *~
 *#*
