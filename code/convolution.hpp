@@ -1,5 +1,5 @@
-#ifndef CONVOLUTION_H
-#define CONVOLUTION_H
+#ifndef SM_CONVOLUTION_H
+#define SM_CONVOLUTION_H
 
 namespace sm {
 	int test();
