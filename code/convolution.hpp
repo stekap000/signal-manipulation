@@ -5,4 +5,4 @@ namespace sm {
 	int test();
 }
 
-#endif
+#endif // SM_CONVOLUTION_H
