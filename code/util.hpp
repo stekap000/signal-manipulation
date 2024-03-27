@@ -3,6 +3,7 @@
 
 #include <string>
 #include <cstdint>
+#include <fstream>
 
 using u64 = std::uint64_t;
 using u32 = std::uint32_t;
@@ -10,19 +11,18 @@ using u16 = std::uint16_t;
 using u8  = std::uint8_t;
 
 namespace sm {
-	
 	struct Wav_File {
-		u32 chunk_id; // B
+		u32 chunk_id; // 'RIFF' (big-endian)
 		u32 chunk_size;
-		u32 format; // B
+		u32 format; // 'WAVE' (big-endian)
 
-		u32 fmt_chunk_id; // B
+		u32 fmt_chunk_id; // 'fmt ' (big-endian)
 		u32 fmt_chunk_size;
 		u16 audio_format;
 		u16 num_channels;
 		u32 sample_rate;
 		u32 byte_rate;
-		u16 block_align;
+		u16 block_align; // 'data' (big-endian)
 		u16 bits_per_sample;
 		//u16 extra_param_size;
 		//extra_params
@@ -31,9 +31,24 @@ namespace sm {
 		u32 data_chunk_size;
 
 		u8 *data;
+
+		void invalidate();
+		bool valid();
+
+		~Wav_File();
 	};
 
-	Wav_File read_wav_file(const std::string &file_name);
+	struct Wav_Reader {
+		std::ifstream in;
+
+		Wav_Reader(const std::string &file_name);
+		~Wav_Reader();
+
+		Wav_Reader &operator>>(u16 &data);
+		Wav_Reader &operator>>(u32 &data);
+
+		Wav_File &read(Wav_File &wf);
+	};
 }
 
 #endif // SM_UTIL_H
