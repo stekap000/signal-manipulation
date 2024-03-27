@@ -32,22 +32,16 @@ namespace sm {
 
 		u8 *data;
 
+		std::ifstream in;
+		
+		Wav_File &operator>>(u16 &data);
+		Wav_File &operator>>(u32 &data);
+
+		void read(const std::string &file_name);
 		void invalidate();
 		bool valid();
 
 		~Wav_File();
-	};
-
-	struct Wav_Reader {
-		std::ifstream in;
-
-		Wav_Reader(const std::string &file_name);
-		~Wav_Reader();
-
-		Wav_Reader &operator>>(u16 &data);
-		Wav_Reader &operator>>(u32 &data);
-
-		Wav_File &read(Wav_File &wf);
 	};
 }
 
