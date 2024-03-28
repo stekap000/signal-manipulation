@@ -12,32 +12,38 @@ using u8  = std::uint8_t;
 
 namespace sm {
 	struct Wav_File {
-		u32 chunk_id; // 'RIFF' (big-endian)
+		u32 chunk_id;		// 'RIFF' (big-endian)
 		u32 chunk_size;
-		u32 format; // 'WAVE' (big-endian)
+		u32 format;			// 'WAVE' (big-endian)
 
-		u32 fmt_chunk_id; // 'fmt ' (big-endian)
+		u32 fmt_chunk_id;	// 'fmt ' (big-endian)
 		u32 fmt_chunk_size;
 		u16 audio_format;
 		u16 num_channels;
 		u32 sample_rate;
 		u32 byte_rate;
-		u16 block_align; // 'data' (big-endian)
+		u16 block_align;	
 		u16 bits_per_sample;
 		//u16 extra_param_size;
 		//extra_params
 
-		u32 data_chunk_id; // B
+		u32 data_chunk_id;  // 'data' (big-endian)
 		u32 data_chunk_size;
 
 		u8 *data;
 
 		std::ifstream in;
+		std::ofstream out;
 		
 		Wav_File &operator>>(u16 &data);
 		Wav_File &operator>>(u32 &data);
 
-		void read(const std::string &file_name);
+		void read_meta(const std::string &file_name);
+		bool read_data(u8 *buffer, u32 size);
+
+		void write_meta(const std::string &file_name);
+		bool write_data(u8 *buffer, u32 size);
+		
 		void invalidate();
 		bool valid();
 
