@@ -11,6 +11,7 @@ using u16 = std::uint16_t;
 using u8  = std::uint8_t;
 
 namespace sm {
+	// TODO: Handle additional chunks that can come after data chunk.
 	struct Wav_File {
 		// 44 size
 		u32 chunk_id;		// 'RIFF' (big-endian)
@@ -42,8 +43,12 @@ namespace sm {
 		void read_meta(const std::string &file_name);
 		bool read_data(u8 *buffer, u32 size);
 
+		void read_all(const std::string &file_name);
+
 		void write_meta(const std::string &file_name);
 		bool write_data(u8 *buffer, u32 size);
+
+		void write_all(const std::string &file_name);
 		
 		void invalidate();
 		bool valid();

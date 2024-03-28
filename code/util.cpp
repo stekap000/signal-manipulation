@@ -82,6 +82,12 @@ namespace sm {
 		return false;
 	}
 
+	void Wav_File::read_all(const std::string &file_name) {
+		read_meta(file_name);
+		data = new u8[data_chunk_size];
+		in.read((char *)data, data_chunk_size);
+	}
+
 	void Wav_File::write_meta(const std::string &file_name) {
 		out.open(file_name, std::ios_base::binary | std::ios_base::app);
 
@@ -104,12 +110,17 @@ namespace sm {
 	
 	bool Wav_File::write_data(u8 *buffer, u32 size) {
 		if(out) {
-			if(out.eof() || out.fail()) std::cout << "OUTPUT FILE EOF OR FAIL" << std::endl;
 			out.write((char *)buffer, size);
+			if(out.eof() || out.fail()) return false;
 			return true;
 		}
 
 		return false;
+	}
+
+	void Wav_File::write_all(const std::string &file_name) {
+		write_meta(file_name);
+		out.write((char *)data, data_chunk_size);
 	}
 	
 	void Wav_File::invalidate() {
