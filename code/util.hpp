@@ -12,6 +12,7 @@ using u8  = std::uint8_t;
 
 namespace sm {
 	struct Wav_File {
+		// 44 size
 		u32 chunk_id;		// 'RIFF' (big-endian)
 		u32 chunk_size;
 		u32 format;			// 'WAVE' (big-endian)
