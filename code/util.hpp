@@ -4,6 +4,7 @@
 #include <string>
 #include <cstdint>
 #include <fstream>
+#include <iostream>
 
 using u64 = std::uint64_t;
 using u32 = std::uint32_t;
@@ -11,9 +12,10 @@ using u16 = std::uint16_t;
 using u8  = std::uint8_t;
 
 namespace sm {
+	constexpr WAV_FILE_HEADER_SIZE 44
 	// TODO: Handle additional chunks that can come after data chunk.
+	// TODO: Make better interface for partial data reads.
 	struct Wav_File {
-		// 44 size
 		u32 chunk_id;		// 'RIFF' (big-endian)
 		u32 chunk_size;
 		u32 format;			// 'WAVE' (big-endian)
@@ -39,19 +41,19 @@ namespace sm {
 		
 		Wav_File &operator>>(u16 &data);
 		Wav_File &operator>>(u32 &data);
-
+		
 		void read_meta(const std::string &file_name);
 		bool read_data(u8 *buffer, u32 size);
-
 		void read_all(const std::string &file_name);
 
 		void write_meta(const std::string &file_name);
 		bool write_data(u8 *buffer, u32 size);
-
 		void write_all(const std::string &file_name);
 		
 		void invalidate();
 		bool valid();
+
+		void print_meta();
 
 		~Wav_File();
 	};
