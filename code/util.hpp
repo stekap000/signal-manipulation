@@ -12,7 +12,7 @@ using u16 = std::uint16_t;
 using u8  = std::uint8_t;
 
 namespace sm {
-	constexpr WAV_FILE_HEADER_SIZE 44
+	constexpr int WAV_FILE_HEADER_SIZE = 44;
 	// TODO: Handle additional chunks that can come after data chunk.
 	// TODO: Make better interface for partial data reads.
 	struct Wav_File {
