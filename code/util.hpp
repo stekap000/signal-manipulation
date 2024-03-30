@@ -1,5 +1,5 @@
-#ifndef SM_UTIL_H
-#define SM_UTIL_H
+#ifndef SM_UTIL_HPP
+#define SM_UTIL_HPP
 
 #include <string>
 #include <cstdint>
@@ -59,4 +59,4 @@ namespace sm {
 	};
 }
 
-#endif // SM_UTIL_H
+#endif // SM_UTIL_HPP

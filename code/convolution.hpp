@@ -1,8 +1,8 @@
-#ifndef SM_CONVOLUTION_H
-#define SM_CONVOLUTION_H
+#ifndef SM_CONVOLUTION_HPP
+#define SM_CONVOLUTION_HPP
 
 namespace sm {
-	int test();
+	
 }
 
-#endif // SM_CONVOLUTION_H
+#endif // SM_CONVOLUTION_HPP
