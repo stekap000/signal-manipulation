@@ -1,5 +1,5 @@
-#ifndef SM_TEST_HPP
-#define SM_TEST_HPP
+#ifndef SM_TEST_CPP
+#define SM_TEST_CPP
 
 namespace sm {
 	u8 *double_frequency(u8 *data, int size) {
