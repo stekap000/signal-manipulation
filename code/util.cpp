@@ -135,4 +135,13 @@ namespace sm {
 		std::cout << "data_chunk_size   =   0x" << data_chunk_size	<< std::endl;
 		std::cout << std::dec;
 	}
+
+	void reverse(u8 *s, int n) {
+		u8 temp = 0;
+		for(int i = 0; i < n/2; ++i) {
+			temp = s[i];
+			s[i] = s[n - i - 1];
+			s[n - i - 1] = temp;
+		}
+	}
 }

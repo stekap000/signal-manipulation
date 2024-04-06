@@ -57,6 +57,8 @@ namespace sm {
 
 		~Wav_File();
 	};
+
+	void reverse(u8 *s, int n);
 }
 
 #endif // SM_UTIL_HPP
